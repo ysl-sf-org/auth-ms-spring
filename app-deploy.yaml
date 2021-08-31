@@ -1,0 +1,101 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  annotations:
+    architecture: x86_64
+    authoritative-source-url: registry.access.redhat.com
+    build-date: 2020-09-01T19:43:46.041620
+    commit.image.appsody.dev/author: Hemankita Perabathini <hperabat@in.ibm.com>
+    commit.image.appsody.dev/committer: Hemankita Perabathini <hperabat@in.ibm.com>
+    commit.image.appsody.dev/date: Fri Oct 23 23:19:22 2020 +0530
+    commit.image.appsody.dev/message: Update README.md
+    commit.stack.appsody.dev/author: kilnerm <38245247+kilnerm@users.noreply.github.com>
+    commit.stack.appsody.dev/committer: GitHub <noreply@github.com>
+    commit.stack.appsody.dev/contextDir: /incubator/java-spring-boot2
+    commit.stack.appsody.dev/date: Fri Oct 9 09:28:22 2020 -0400
+    commit.stack.appsody.dev/message: 'Merge pull request #347 from garypicher/updateUBIVersionForOpenJDKImage'
+    description: This image is the Kabanero development container for the java-spring-boot2
+      stack
+    distribution-scope: public
+    image.opencontainers.org/created: "2021-01-13T18:43:53+05:30"
+    image.opencontainers.org/documentation: https://github.com/ibm-garage-ref-storefront/auth-ms-spring
+    image.opencontainers.org/revision: ac5be23ecbd3d830d678013b0ff40a44dc05d3bf-modified
+    image.opencontainers.org/source: https://github.com/ibm-garage-ref-storefront/auth-ms-spring/tree/master
+    image.opencontainers.org/url: https://github.com/ibm-garage-ref-storefront/auth-ms-spring
+    k8s.io/description: The Universal Base Image is designed and engineered to be
+      the base layer for all of your containerized applications, middleware and utilities.
+      This base image is freely redistributable, but Red Hat only supports Red Hat
+      technologies through subscriptions for Red Hat products. This image is maintained
+      by Red Hat and updated regularly.
+    k8s.io/display-name: Red Hat Universal Base Image 8
+    maintainer: Red Hat, Inc.
+    name: kabanero/java-spring-boot2
+    openshift.io/expose-services: ""
+    openshift.io/tags: base rhel8
+    redhat.com/build-host: cpt-1008.osbs.prod.upshift.rdu2.redhat.com
+    redhat.com/component: ubi8-container
+    redhat.com/license_terms: https://www.redhat.com/en/about/red-hat-end-user-license-agreements#UBI
+    release: "347"
+    stack.appsody.dev/authors: Mike Andrasak <uberskigeek>, Andy Mauer <ajm01>, Scott
+      Kurz <scottkurz>, Adam Wisniewski <awisniew90>
+    stack.appsody.dev/configured: docker.io/kabanero/java-spring-boot2:0.3
+    stack.appsody.dev/created: "2020-10-09T19:29:16Z"
+    stack.appsody.dev/description: Spring Boot using OpenJ9 and Maven
+    stack.appsody.dev/digest: sha256:26967ae1dbb132bb3ef942042bfa2384cd00726daabee81ce6023d979ad42995
+    stack.appsody.dev/documentation: https://github.com/kabanero-io/collections/tree/master/incubator/java-spring-boot2/README.md
+    stack.appsody.dev/licenses: Apache-2.0
+    stack.appsody.dev/revision: 399b43ed14eb9238a8f9068f59b4bc535b62112b
+    stack.appsody.dev/source: https://github.com/kabanero-io/collections/tree/master/incubator/java-spring-boot2/image
+    stack.appsody.dev/tag: docker.io/kabanero/java-spring-boot2:0.3.31
+    stack.appsody.dev/title: Spring Boot®
+    stack.appsody.dev/url: https://github.com/kabanero-io/collections/tree/master/incubator/java-spring-boot2
+    summary: Image for Kabanero java-spring-boot2 development
+    url: https://access.redhat.com/containers/#/registry.access.redhat.com/ubi8/images/8.2-347
+    vcs-ref: 663db861f0ff7a9c526c1c169a62c14c01a32dcc
+    vcs-type: git
+    vendor: Kabanero
+    version: 0.3.23
+  creationTimestamp: null
+  labels:
+    image.opencontainers.org/title: auth-ms-spring
+    stack.appsody.dev/id: java-spring-boot2
+    stack.appsody.dev/version: 0.3.31
+  name: auth-ms-spring
+  namespace: storefront-dev
+spec:
+  applicationImage: dev.local/auth-ms-spring
+  createKnativeService: false
+  env:
+  - name: CUSTOMER_URL
+    value: http://customer-ms-spring:8080/micro/customer/search
+  - name: HS256_KEY
+    value: E6526VJkKYhyTFRFMC0pTECpHcZ7TGcq8pKsVVgz9KtESVpheEO284qKzfzg8HpWNBPeHOxNGlyudUHi6i8tFQJXC8PiI48RUpMh23vPDLGD35pCM0417gf58z5xlmRNii56fwRCmIhhV7hDsm3KO2jRv4EBVz7HrYbzFeqI45CaStkMYNipzSm2duuer7zRdMjEKIdqsby0JfpQpykHmC5L6hxkX0BT7XWqztTr6xHCwqst26O0g8r7bXSYjp4a
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/liveness
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  monitoring:
+    endpoints:
+    - path: /actuator/prometheus
+    labels:
+      k8s-app: auth-ms-spring
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /actuator/health
+      port: 8080
+    initialDelaySeconds: 5
+    periodSeconds: 2
+    timeoutSeconds: 1
+  service:
+    annotations:
+      prometheus.io/path: /actuator/prometheus
+      prometheus.io/scrape: "true"
+    port: 8080
+    type: NodePort
+  stack: java-spring-boot2
+  version: 1.0.0

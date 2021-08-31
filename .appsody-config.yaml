@@ -1,0 +1,3 @@
+id: "20200430130422.19887300"
+project-name: auth-ms-spring
+stack: docker.io/kabanero/java-spring-boot2:0.3
